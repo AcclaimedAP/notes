@@ -25,7 +25,7 @@ function startDatabase(){
       }
       con.changeUser({ database: DATABASE_NAME }, function (err) {
         if (err) throw err;
-        var sql = `CREATE TABLE IF NOT EXISTS ${USERNAME_TABLE} (userID INT NOT NULL AUTO_INCREMENT PRIMARY KEY, username VARCHAR(32), password VARCHAR(32))`;
+        var sql = `CREATE TABLE IF NOT EXISTS ${USERNAME_TABLE} (userID INT NOT NULL AUTO_INCREMENT PRIMARY KEY, username VARCHAR(32) UNIQUE KEY, password VARCHAR(32))`;
         con.query(sql, function (err, result) {
           if (err) throw err;
           console.log(`Table ${USERNAME_TABLE} is running!`);

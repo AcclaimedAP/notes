@@ -23,14 +23,21 @@ router.post('/new', async function (req, res) {
     username: req.body.username,
     password: req.body.password
   }
-
-  var sql = `INSERT INTO users (username, password) VALUES ('${user.username}', '${user.password}')`;
+  var sql = `SELECT * FROM users WHERE username = ${mysql.escape(user.username)}`;
+  con.query(sql, function (err, result) {
+    if (result.length > 0) {
+      res.send({success: false, user: user.username})
+    } else {
+    sql = `INSERT INTO users (username, password) VALUES ('${mysql.escape(user.username)}', '${mysql.escape(user.password)}')`;
   
-  con.query(sql, function (err) {
-    if (err) throw err;
-    console.log("Added " + user.username);
-    res.send('Added user ' + user.username);
+    con.query(sql, function (err) {
+      if (err) throw err;
+      console.log("Added " + user.username);
+      res.send({success: true, user: user.username});
+    });
+    };
   });
+  
 });
 
 router.get('/all', async function (req, res) {
