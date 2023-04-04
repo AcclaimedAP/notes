@@ -26,15 +26,16 @@ router.post('/new', async function (req, res) {
   var sql = `SELECT * FROM users WHERE username = ${mysql.escape(user.username)}`;
   con.query(sql, function (err, result) {
     if (err) throw err;
+    console.log(result.length);
     if (result.length > 0) {
-      res.send({success: false, user: user.username})
+      res.status(400).send({success: false, user: user.username})
     } else {
     sql = `INSERT INTO users (username, password) VALUES (${mysql.escape(user.username)}, ${mysql.escape(user.password)})`;
   
     con.query(sql, function (err) {
       if (err) throw err;
       console.log("Added " + user.username);
-      res.send({success: true, user: user.username});
+      res.status(200).send({success: true, user: user.username});
     });
     };
   });
@@ -49,11 +50,15 @@ router.post('/login', async function (req, res) {
   sql = `SELECT * FROM users WHERE username = ${mysql.escape(req.body.username)}`;
   con.query(sql, function (err, result) {
     if (err) throw err;
+    console.log(result);
 
-    if (result[0].password == user.password) {
-      res.send({ loginSuccessful: true, id: result[0].userID });
+    if (result.length < 1) {
+      console.log("failed login");
+      res.status(401).send({ loginSuccessful: false, id: null });
+    } else if (result[0].password == user.password) {
+      res.status(200).send({ loginSuccessful: true, id: result[0].userID });
     } else {
-      res.send({ loginSuccessful: false, id: null });
+      res.status(401).send({ loginSuccessful: false, id: null });
     }
   })
 
@@ -63,7 +68,7 @@ router.get('/all', async function (req, res) {
   sql = `SELECT * FROM users`;
   con.query(sql, function (err, result) {
     if (err) throw err;
-    res.send(result);
+    res.status(200).send(result);
   });
       
 });
