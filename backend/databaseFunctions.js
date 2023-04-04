@@ -30,7 +30,12 @@ function startDatabase(){
           if (err) throw err;
           console.log(`Table ${USERNAME_TABLE} is running!`);
         });
-        sql = `CREATE TABLE IF NOT EXISTS ${DOCUMENT_TABLE} (documentID INT AUTO_INCREMENT PRIMARY KEY, content TEXT(65535),userID INT, CONSTRAINT authorID FOREIGN KEY (userID) REFERENCES users(userID))`
+        sql = `CREATE TABLE IF NOT EXISTS ${DOCUMENT_TABLE} 
+        (
+          documentID INT AUTO_INCREMENT PRIMARY KEY, 
+          content TEXT(65535),
+          authorID INT NOT NULL DEFAULT '0'
+        )`
         con.query(sql, function (err, result) {
           if (err) throw err;
           console.log(`Table ${DOCUMENT_TABLE} is running!`);

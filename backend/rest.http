@@ -23,3 +23,23 @@ Content-Type: application/json
 }
 
 ###
+
+GET http://localhost:3000/documents/all HTTP/1.1
+
+###
+
+POST http://localhost:3000/documents/new HTTP/1.1
+Content-Type: application/json
+
+{
+    "authorId": 23,
+    "content": "<h3>Test</h3><br><p>Test document</p>"
+}
+
+###
+
+POST http://localhost:3000/documents/author/23 HTTP/1.1
+
+###
+
+POST http://localhost:3000/documents/doc/2 HTTP/1.1
