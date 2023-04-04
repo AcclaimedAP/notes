@@ -1,4 +1,6 @@
+import { readFromLocalstorage, saveToLocalstorage } from "../functions";
 import { loginRequest } from "../services/userServices";
+import { navbar } from "./universal";
 
 function loginPage(container) {
     const form = document.createElement('form');
@@ -18,7 +20,12 @@ function loginPage(container) {
         e.preventDefault();
         const res = await loginRequest(usernameField.value, passwordField.value);
         console.log(res);
-        
+        if (res.loginSuccessful) {
+            saveToLocalstorage("id", res.id);
+            form.remove();
+            navbar(container);
+
+        }
     });
 }
 

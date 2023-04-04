@@ -33,6 +33,8 @@ Content-Type: application/json
 
 {
     "authorId": 23,
+    "title": "test document",
+    "description": "sample description!",
     "content": "<h3>Test</h3><br><p>Test document</p>"
 }
 

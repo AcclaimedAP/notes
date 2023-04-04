@@ -32,7 +32,9 @@ function startDatabase(){
         });
         sql = `CREATE TABLE IF NOT EXISTS ${DOCUMENT_TABLE} 
         (
-          documentID INT AUTO_INCREMENT PRIMARY KEY, 
+          documentID INT AUTO_INCREMENT PRIMARY KEY,
+          title VARCHAR(128),
+          description VARCHAR(255),
           content TEXT(65535),
           authorID INT NOT NULL DEFAULT '0'
         )`
