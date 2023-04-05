@@ -7,7 +7,9 @@ crypto of passwords + ids
 look over adding documents after front end, ppl say it doesn't work?
 
 frontend:
-Login
-find way to track being logged in
+Login✅
+find way to track being logged in✅
 WYSIWYG editor site
-show list of documents(only owned? all?)
+show list of documents(only owned? all?)✅
+view document
+edit document
