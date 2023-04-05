@@ -1,8 +1,10 @@
 import { readFromLocalstorage } from "../functions";
 import { getDocumentsByAuthor } from "../services/documentsServices";
+import { navbar } from "./universal";
 
 
 async function viewDocuments(dom) {
+    navbar(dom);
     const res = await getDocumentsByAuthor(readFromLocalstorage("id"));
     const container = document.createElement('div');
     const ul = document.createElement('ul');

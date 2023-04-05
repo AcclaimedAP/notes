@@ -1,4 +1,5 @@
 import { removeFromLocalstorage } from "../functions";
+import { editDocument } from "./editDocuments";
 import { viewDocuments } from "./viewDocuments";
 
 function navbar(dom) {
@@ -16,10 +17,13 @@ function navbar(dom) {
     viewDocs.innerHTML = "View your documents";
     logout.innerHTML = "Logout";
     createDocument.addEventListener('click', function () {
-        
+        dom.innerHTML = "";
+        editDocument(dom);
     });
     viewDocs.addEventListener('click', function () {
+        dom.innerHTML = "";
         viewDocuments(dom);
+
     });
     logout.addEventListener('click', function () {
         removeFromLocalstorage('id');
