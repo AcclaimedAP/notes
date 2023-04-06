@@ -1,5 +1,5 @@
 import { readFromLocalstorage } from "../functions";
-import { getDocumentsByAuthor } from "../services/documentsServices";
+import { getDocumentsByAuthor, getDocumentsByDocumentId } from "../services/documentsServices";
 import { editDocument } from "./editDocuments";
 import { navbar } from "./universal";
 
@@ -10,19 +10,52 @@ async function viewDocuments(dom) {
     const container = document.createElement('div');
     const ul = document.createElement('ul');
     container.appendChild(ul);
-    res.forEach(obj => {
+    //res.forEach(obj => {
+    for (var obj of res) {
+        console.log(obj);
         const li = document.createElement('li');
-        li.innerHTML = `#${obj.documentID} - ${obj.title}: ${obj.description}`
-        
+        const editLink = document.createElement('a');
+        li.innerHTML = `#${obj.documentID} - ${obj.title}: ${obj.description} - `
+        editLink.innerHTML = "Edit"
         ul.appendChild(li);
+        ul.appendChild(editLink);
 
-        li.addEventListener('click', function () {
+        editLink.addEventListener('click', function () {
+            dom.innerHTML = "";
+            navbar(dom);
             editDocument(dom, obj.documentID);
-            container.remove();
+            
+            
         });
-    });
+        li.addEventListener('click', function () {
+            dom.innerHTML = "";
+            navbar(dom);
+            showDocument(dom, obj.documentID);
+            
+        });
+    };
     console.log(res);
     dom.appendChild(container);
 }
 
-export { viewDocuments }
+async function showDocument(dom, id) {
+    console.log(id);
+    const res = await getDocumentsByDocumentId(id);
+    console.log(res);
+    const container = document.createElement('div');
+    const title = document.createElement('h1');
+    const description = document.createElement('p');
+    const docContent = document.createElement('div');
+
+    title.innerHTML = res[0].title;
+    description.innerHTML = res[0].description;
+    docContent.innerHTML = res[0].content;
+
+
+    container.appendChild(title);
+    container.appendChild(description);
+    container.appendChild(docContent);
+    dom.appendChild(container);
+}
+
+export { viewDocuments, showDocument }

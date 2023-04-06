@@ -37,10 +37,11 @@ router.post('/author/:id', async function (req, res) {
 });
 
 router.post('/doc/:id', async function (req, res) {
-
+    console.log(req.params.id);
     var sql = `SELECT * FROM documents WHERE documentID = ${mysql.escape(req.params.id)}`;
     con.query(sql, function (err, result) {
-        if (err) throw err;
+      if (err) throw err;
+      console.log(result);
         res.send(result);
     })
 });
