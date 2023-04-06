@@ -45,6 +45,24 @@ router.post('/doc/:id', async function (req, res) {
     })
 });
 
+router.post('/edit', async function (req, res) {
+  doc = {
+      id: req.body.id,
+      title: req.body.title,
+      description: req.body.description,
+      content: req.body.content
+  };
+  console.log(doc);
+    sql = `UPDATE documents SET title = ${mysql.escape(doc.title)}, description = ${mysql.escape(doc.description)}, content = ${mysql.escape(doc.content)} WHERE documentID = ${mysql.escape(doc.id)}`;
+  
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log(`Updated document with id ${result.insertId}`);
+        res.send({ success: true, documentId: result.insertId });
+    });
+
+})
+
 router.post('/new', async function (req, res) {
     doc = {
       authorId: req.body.authorId,
