@@ -12,6 +12,7 @@
     "vite": "^4.2.0"
   },
   "dependencies": {
+    "sass": "^1.61.0",
     "tinymce": "^6.4.1"
   }
 }

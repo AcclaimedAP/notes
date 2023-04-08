@@ -1,5 +1,5 @@
 import { loginPage } from './pages/login'
-import '../style.css'
+import '../style.scss'
 
 function init() {
     const app = document.getElementById('app');
