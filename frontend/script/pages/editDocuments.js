@@ -25,8 +25,9 @@ function createDocument(dom) {
     submit.innerHTML = 'Save';
     tinymce.init({
         selector: '#textContent',
-
-        setp: function (editor) {
+        plugins: "code",
+        toolbar: "undo redo | forecolor backcolor | styleselect bold italic | alignleft aligncenter alignright | code",
+        setup: function (editor) {
             editor.on("change", function () {
                 editor.save();
             })
@@ -68,8 +69,9 @@ async function editDocument(dom, id) {
     textarea.value = res[0].content;
     tinymce.init({
         selector: '#textContent',
-
-        setp: function (editor) {
+        plugins: "code",
+        toolbar: "undo redo | forecolor backcolor | styleselect bold italic | alignleft aligncenter alignright | code",
+        setup: function (editor) {
             editor.on("change", function () {
                 editor.save();
             })
