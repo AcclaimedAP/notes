@@ -5,13 +5,20 @@ import { navbar } from "./universal";
 function createDocument(dom) {
     navbar(dom);
     const form = document.createElement('form');
+    form.classList.add('documentEditor');
+    const titleLabel = document.createElement('label');
+    titleLabel.innerHTML = "Title"
     const titleInput = document.createElement('input');
-    const descInput = document.createElement('textarea');
+    const descLabel = document.createElement('label');
+    descLabel.innerHTML = "Description";
+    const descInput = document.createElement('input');
     const textarea = document.createElement('textarea');
     const submit = document.createElement('button');
     textarea.setAttribute('id', 'textContent');
-    form.appendChild(titleInput);
-    form.appendChild(descInput);
+    titleLabel.appendChild(titleInput);
+    descLabel.appendChild(descInput);
+    form.appendChild(titleLabel);
+    form.appendChild(descLabel);
     form.appendChild(textarea);
     form.appendChild(submit);
     dom.appendChild(form);
@@ -39,15 +46,21 @@ function createDocument(dom) {
 }
 async function editDocument(dom, id) {
     const res = await getDocumentsByDocumentId(id);
-    console.log(res);
     const form = document.createElement('form');
+    form.classList.add('documentEditor');
+    const titleLabel = document.createElement('label');
+    titleLabel.innerHTML = "Title"
     const titleInput = document.createElement('input');
-    const descInput = document.createElement('textarea');
+    const descLabel = document.createElement('label');
+    descLabel.innerHTML = "Description";
+    const descInput = document.createElement('input');
     const textarea = document.createElement('textarea');
     const submit = document.createElement('button');
     textarea.setAttribute('id', 'textContent');
-    form.appendChild(titleInput);
-    form.appendChild(descInput);
+    titleLabel.appendChild(titleInput);
+    descLabel.appendChild(descInput);
+    form.appendChild(titleLabel);
+    form.appendChild(descLabel);
     form.appendChild(textarea);
     form.appendChild(submit);
     dom.appendChild(form);
