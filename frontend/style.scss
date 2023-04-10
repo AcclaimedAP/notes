@@ -50,6 +50,15 @@
       height: 32px;
       font-size: 20px;
     }
+    p {
+      cursor: pointer;
+      
+      color: rgb(40, 51, 204);
+      text-decoration: underline;
+      &:hover {
+        color: rgb(67, 76, 214);
+      }
+    }
   }
   nav {
     background-color: rgb(248, 248, 248);
@@ -95,13 +104,73 @@
       }
     }
 
-    
+    button {
+      width: 150px;
+      height: 32px;
+      font-size: 18px;
+      margin-left: auto;
+      margin-top: 16px;
+      display: block;
+    }
     
     label:nth-child(2) {
       
       input {
         width: 80%;
       }
+    }
+  }
+
+  .documentList {
+    background-color: rgb(248, 248, 248);
+    filter: drop-shadow(5px 5px 4px rgba(0,0,0,0.3));
+    border-radius: 10px;
+    padding: 16px;
+    margin: 16px 0;
+
+    ul {
+      
+      li {
+        width: calc(100% - 40px);
+        display: inline-block;
+        cursor: pointer;
+        font-size: 18px;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      a {
+        cursor: pointer;
+        float: right;
+        display: inline;
+
+        &:hover {
+          color: rgb(41, 47, 138);
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .showDocument {
+    background-color: rgb(248, 248, 248);
+    filter: drop-shadow(5px 5px 4px rgba(0,0,0,0.3));
+    border-radius: 10px;
+    padding: 16px;
+    margin: 16px 0;
+
+    .title {
+      font-size: 32px;
+    }
+    .description {
+      font-size: 20px;
+    }
+
+    div {
+      background-color: #ffffff;
+      filter: drop-shadow(5px 5px 4px rgba(0,0,0,0.3));
+      padding: 16px;
     }
   }
 }
