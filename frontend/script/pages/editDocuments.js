@@ -14,6 +14,7 @@ function createDocument(dom) {
     const descInput = document.createElement('input');
     const textarea = document.createElement('textarea');
     const submit = document.createElement('button');
+    submit.classList.add('save');
     textarea.setAttribute('id', 'textContent');
     titleLabel.appendChild(titleInput);
     descLabel.appendChild(descInput);
@@ -57,6 +58,7 @@ async function editDocument(dom, id) {
     const descInput = document.createElement('input');
     const textarea = document.createElement('textarea');
     const submit = document.createElement('button');
+    submit.classList.add('save');
     textarea.setAttribute('id', 'textContent');
     titleLabel.appendChild(titleInput);
     descLabel.appendChild(descInput);
