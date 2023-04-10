@@ -1,3 +1,5 @@
+import { readFromLocalstorage } from "../functions";
+
 function getDocumentsByDocumentId(id) {
     console.log(id);
     return fetch('http://localhost:3000/documents/doc/' + id, {
@@ -11,22 +13,22 @@ function getDocumentsByDocumentId(id) {
         });
 }
 
-function getDocumentsByAuthor(id) {
-
-    return fetch('http://localhost:3000/documents/author/' + id, {
+function getDocumentsByAuthor() {
+    const session = { sessionKey: readFromLocalstorage('sessionKey')}
+    return fetch('http://localhost:3000/documents/author', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
-        }
+        }, body: JSON.stringify(session)
     }).then (res => res.json())
         .then(res => {
             return res;
     })
 }
 
-function postNewDocument(id, docTitle = "New document", docDesc = "", docContent = "") {
+function postNewDocument(key, docTitle = "New document", docDesc = "", docContent = "") {
     const doc = {
-        authorId: id,
+        sessionKey: key,
         title: docTitle,
         description: docDesc,
         content: docContent

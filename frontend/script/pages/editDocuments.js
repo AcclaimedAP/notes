@@ -38,7 +38,7 @@ function createDocument(dom) {
     submit.addEventListener('click', async function (e) {
         e.preventDefault();
         var content = tinymce.get('textContent').getContent();
-        const response = await postNewDocument(readFromLocalstorage("id"), titleInput.value, descInput.value, content);
+        const response = await postNewDocument(readFromLocalstorage("sessionKey"), titleInput.value, descInput.value, content);
         console.log(response);
         if (response.success) {
             tinymce.remove('#textContent');
@@ -86,7 +86,6 @@ async function editDocument(dom, id) {
         e.preventDefault();
         var content = tinymce.get('textContent').getContent();
         const response = await updateDocument(res[0].documentID, titleInput.value, descInput.value, content);
-        console.log(response);
         if (response.success) {
             tinymce.remove('#textContent');
             form.remove();

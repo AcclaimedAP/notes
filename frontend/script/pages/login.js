@@ -28,9 +28,8 @@ function loginPage(container) {
     submitButton.addEventListener('click', async function (e) {
         e.preventDefault();
         const res = await loginRequest(usernameField.value, passwordField.value);
-        console.log(res);
         if (res.loginSuccessful) {
-            saveToLocalstorage("id", res.id);
+            saveToLocalstorage("sessionKey", res.sessionKey);
             form.remove();
             navbar(container);
 
@@ -68,7 +67,6 @@ function registerForm(container) {
     submitButton.addEventListener('click', async function (e) {
         e.preventDefault();
         const res = await registerRequest(usernameField.value, passwordField.value);
-        console.log(res);
         if (res.success) {
             form.remove();
             loginPage(container);

@@ -18,7 +18,7 @@ POST http://localhost:3000/users/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "testaaaaa",
+    "username": "test",
     "password": "password"
 }
 
@@ -52,8 +52,22 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/documents/author/23 HTTP/1.1
+POST http://localhost:3000/documents/author HTTP/1.1
+Content-Type: application/json
+
+{
+    "sessionKey": "c67fccb4-151d-4500-a1e4-a19c42af872e"
+}
 
 ###
 
 POST http://localhost:3000/documents/doc/2 HTTP/1.1
+
+###
+
+POST http://localhost:3000/users/logout HTTP/1.1
+Content-Type: application/json
+
+{
+    "sessionKey": "c67fccb4-151d-4500-a1e4-a19c42af872e"
+}

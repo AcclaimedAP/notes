@@ -1,4 +1,5 @@
 import { removeFromLocalstorage } from "../functions";
+import { logoutRequest } from "../services/userServices";
 import { createDocument } from "./editDocuments";
 import { viewDocuments } from "./viewDocuments";
 
@@ -27,10 +28,13 @@ function navbar(dom) {
         viewDocuments(dom);
 
     });
-    logout.addEventListener('click', function () {
+    logout.addEventListener('click', async function () {
         tinymce.remove('#textContent');
-        removeFromLocalstorage('id');
-        location.reload();
+        const res = await logoutRequest();
+        if (res.loggedOut){
+            removeFromLocalstorage('sessionKey');
+            location.reload();
+        }
     });
     dom.appendChild(navbar);
 }

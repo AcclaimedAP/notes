@@ -4,7 +4,7 @@ const mysql = require('mysql');
 const DATABASE_NAME = 'notesdb';
 const USERNAME_TABLE = 'users';
 const DOCUMENT_TABLE = 'documents';
-const DOCUMENT_OWNER_TABLE = 'user_documents'
+const SESSION_TABLE = 'sessions'
 
 var con = mysql.createConnection({
   host: "localhost",
@@ -42,7 +42,17 @@ function startDatabase(){
           if (err) throw err;
           console.log(`Table ${DOCUMENT_TABLE} is running!`);
         });
-        
+        sql = `CREATE TABLE IF NOT EXISTS ${SESSION_TABLE} 
+        (
+          sessionID INT AUTO_INCREMENT PRIMARY KEY,
+          sessionKey VARCHAR(128) NOT NULL,
+          active BOOLEAN DEFAULT true,
+          userID INT NOT NULL
+        )`
+        con.query(sql, function (err, result) {
+          if (err) throw err;
+          console.log(`Table ${SESSION_TABLE} is running!`);
+        });
       });
     });
   });

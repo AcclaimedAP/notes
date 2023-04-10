@@ -3,6 +3,7 @@ var router = express.Router();
 var db = require('../databaseFunctions');
 const mysql = require('mysql');
 require('dotenv').config();
+const { v4: uuidv4 } = require('uuid');
 
 var con = mysql.createConnection({
   host: "localhost",
@@ -48,7 +49,7 @@ router.post('/login', async function (req, res) {
     password: req.body.password
   }
   sql = `SELECT * FROM users WHERE username = ${mysql.escape(req.body.username)}`;
-  con.query(sql, function (err, result) {
+  con.query(sql, async function (err, result) {
     if (err) throw err;
     console.log(result);
 
@@ -56,13 +57,34 @@ router.post('/login', async function (req, res) {
       console.log("failed login");
       res.status(401).send({ loginSuccessful: false, id: null });
     } else if (result[0].password == user.password) {
-      res.status(200).send({ loginSuccessful: true, id: result[0].userID });
+        const uuid = uuidv4();
+        sql = `INSERT INTO sessions (sessionKey,userID) VALUES (${mysql.escape(uuid)}, ${mysql.escape(result[0].userID)})`;
+  
+        con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log(`new session ${result.insertId} for userId ${result.userID} with key ${uuid}`);
+          
+          res.status(200).send({ loginSuccessful: true, sessionKey: uuid });
+          
+    });
+      
     } else {
       res.status(401).send({ loginSuccessful: false, id: null });
     }
   })
 
 });
+
+router.post('/logout', function (req, res) {
+  var sql = `UPDATE sessions SET active = false WHERE sessionKey = ${mysql.escape(req.body.sessionKey)}`;
+  
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log(result);
+        res.send({ loggedOut: true });
+    });
+});
+
 
 router.get('/all', async function (req, res) {
   sql = `SELECT * FROM users`;

@@ -1,3 +1,4 @@
+import { readFromLocalstorage } from "../functions";
 
 
 function loginRequest(name, pass) {
@@ -13,7 +14,6 @@ function loginRequest(name, pass) {
         body: JSON.stringify(user)
     }).then (res => res.json())
         .then(res => {
-            console.log(res);
             return res;
     })
 }
@@ -31,9 +31,23 @@ function registerRequest(name, pass) {
         body: JSON.stringify(user)
     }).then (res => res.json())
         .then(res => {
-            console.log(res);
             return res;
     })
 }
 
-export { loginRequest, registerRequest }
+function logoutRequest() {
+    const session = { sessionKey: readFromLocalstorage('sessionKey')}
+    return fetch('http://localhost:3000/users/logout', {
+        
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(session)
+    }).then (res => res.json())
+        .then(res => {
+            return res;
+    })
+}
+
+export { loginRequest, registerRequest, logoutRequest }
