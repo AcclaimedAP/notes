@@ -15,5 +15,5 @@ view document✅
 edit document✅
 
 Backend:
-Improve security -> Sessions?
-Create sessions on login in a database linked to userid, sessions contain a token, user stores it in localstorage, on api calls, send it and server verifies. On logout mark sessions "inactive".
+Improve security -> Sessions?✅
+Create sessions on login in a database linked to userid, sessions contain a token, user stores it in localstorage, on api calls, send it and server verifies. On logout mark sessions "inactive".✅

@@ -1,6 +1,6 @@
 import { readFromLocalstorage, saveToLocalstorage } from "../functions";
 import { loginRequest, registerRequest } from "../services/userServices";
-import { navbar } from "./universal";
+import { navbar, popupBox } from "./universal";
 
 function loginPage(container) {
     const form = document.createElement('form');
@@ -32,7 +32,8 @@ function loginPage(container) {
             saveToLocalstorage("sessionKey", res.sessionKey);
             form.remove();
             navbar(container);
-
+        } else {
+            popupBox("Failed login, username or password incorrect");
         }
     });
     register.addEventListener('click', function () {
@@ -71,6 +72,8 @@ function registerForm(container) {
             form.remove();
             loginPage(container);
 
+        } else {
+            popupBox('Failed registration, username is taken.');
         }
     });
     login.addEventListener('click', function () {

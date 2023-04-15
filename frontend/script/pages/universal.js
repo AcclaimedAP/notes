@@ -39,4 +39,23 @@ function navbar(dom) {
     dom.appendChild(navbar);
 }
 
-export { navbar }
+function popupBox(content, closeText = "Ok") {
+    const container = document.getElementById('popupContainer');
+    const popup = document.createElement('div');
+    const text = document.createElement('p');
+    const closeButton = document.createElement('button');
+    text.innerHTML = content;
+    closeButton.innerHTML = closeText;
+    popup.appendChild(text);
+    popup.appendChild(closeButton);
+    container.appendChild(popup);
+
+    closeButton.addEventListener('click', function () {
+        popup.remove();
+    });
+    setTimeout(() => {
+        popup.remove();
+    }, 10000);
+}
+
+export { navbar, popupBox }
