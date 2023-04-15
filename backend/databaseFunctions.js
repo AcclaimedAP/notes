@@ -1,6 +1,11 @@
 require('dotenv').config();
 const mysql = require('mysql');
 
+
+// INPUT MYSQL LOGIN HERE, THIS IS FOR TESTING ONLY, IN ACTUAL BUILDS, MAKE SURE THESE ARE SAFELY STORED AND NOT EXPOSED TO ANYONE.
+const MYSQL_USERNAME = "root";
+const MYSQL_PASSWORD = "password";
+
 const DATABASE_NAME = 'notesdb';
 const USERNAME_TABLE = 'users';
 const DOCUMENT_TABLE = 'documents';
@@ -8,8 +13,8 @@ const SESSION_TABLE = 'sessions'
 
 var con = mysql.createConnection({
   host: "localhost",
-  user: process.env.MYSQL_USERNAME,
-  password: process.env.MYSQL_PASSWORD
+  user: MYSQL_USERNAME,
+  password: MYSQL_PASSWORD
 });
 function startDatabase(){
   con.connect(function (err) {
