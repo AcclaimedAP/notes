@@ -3,7 +3,7 @@ const mysql = require('mysql');
 
 
 // INPUT MYSQL LOGIN HERE, THIS IS FOR TESTING ONLY, IN ACTUAL BUILDS, MAKE SURE THESE ARE SAFELY STORED AND NOT EXPOSED TO ANYONE.
-const MYSQL_USERNAME = "root";
+const MYSQL_USERNAME = "testuser";
 const MYSQL_PASSWORD = "password";
 
 const DATABASE_NAME = 'notesdb';

@@ -1,9 +1,11 @@
 A fullstack application that handles users, and lets them create documents in a WYSIWYG editor, save them on a database, and edit or preview them later.
 
 
-Before starting the project, make sure you go to .\backend\databaseFunctions.js and change the username and password of the following lines to match your database:
+You can test the exported database, the details are located in .\backend\databaseFunctions.js, in plaintext. In actual public work, do not have these things in plaintext like this.
+
+Here's the snip of what to look for. These should allow you to access the database.
 ```
-const MYSQL_USERNAME = "root";
+const MYSQL_USERNAME = "testuser";
 const MYSQL_PASSWORD = "password";
 ```
 
